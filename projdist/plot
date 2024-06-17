@@ -1,0 +1,33 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+points = [30000, 60000, 90000]
+seq_times = [19.97, 80.94, 192.12]
+dist_times = [37.91, 71.67, 120.80]
+seq_accuracy = [95.12, 95.42, 95.63]
+dist_accuracy = [95.26, 95.49, 95.70]
+
+
+bar_width = 0.35
+
+
+r1 = np.arange(len(points))
+r2 = [x + bar_width for x in r1]
+
+
+plt.figure(figsize=(12, 6))
+bars1 = plt.bar(r1, seq_times, color='#cb91fc', width=bar_width, edgecolor='grey', label='Sequenziale')
+bars2 = plt.bar(r2, dist_times, color='#85d77a', width=bar_width, edgecolor='grey', label='Distribuito')
+
+for bar, acc in zip(bars1, seq_accuracy):
+    plt.text(bar.get_x() + bar.get_width() / 2, bar.get_height() / 2, f'{acc}%', color='white', ha='center', va='center')
+for bar, acc in zip(bars2, dist_accuracy):
+    plt.text(bar.get_x() + bar.get_width() / 2, bar.get_height() / 2, f'{acc}%', color='white', ha='center', va='center')
+
+plt.xlabel('Numero di punti')
+plt.ylabel('Tempo di esecuzione (s)')
+plt.title('Confronto tra algoritmo sequenziale e distribuito')
+plt.xticks([r + bar_width / 2 for r in range(len(points))], points)
+plt.legend()
+
+plt.show()
