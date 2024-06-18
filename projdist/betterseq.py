@@ -16,13 +16,13 @@ Y = iris.target
 
 class_names = {0: 'Setosa', 1: 'Versicolor', 2: 'Virginica'}
 
-augmented_data = RandomOverSampler(sampling_strategy={0: 30000, 1: 30000, 2: 30000}, random_state=42)
+augmented_data = RandomOverSampler(sampling_strategy={0: 30000, 1: 30000, 2: 30000}, random_state=1)
 X_resampled, Y_resampled = augmented_data.fit_resample(X, Y)
 
 noise_factor = 0.2
 X_resampled_noisy = X_resampled + noise_factor * np.random.randn(*X_resampled.shape)
 
-X_train, X_test, Y_train, Y_test = train_test_split(X_resampled_noisy, Y_resampled, test_size=0.3, random_state=42)
+X_train, X_test, Y_train, Y_test = train_test_split(X_resampled_noisy, Y_resampled, test_size=0.3, random_state=1)
 
 pca = PCA(n_components=3)
 X_train_pca = pca.fit_transform(X_train)

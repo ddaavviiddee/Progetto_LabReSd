@@ -23,7 +23,8 @@ Y = iris.target
 class_names = {0: 'Setosa', 1: 'Versicolor', 2: 'Virginica'}
 
 # Data augmentation con RandomOverSampler
-augmented_data = RandomOverSampler(sampling_strategy={0: 40000, 1: 40000, 2: 40000}, random_state=1)
+# Inserire il numero di punti per ogni classe del dizionario
+augmented_data = RandomOverSampler(sampling_strategy={0: 30000, 1: 30000, 2: 30000}, random_state=1)
 X_resampled, Y_resampled = augmented_data.fit_resample(X, Y)
 
 # Aggiunta di rumore gaussiano sul dataset
